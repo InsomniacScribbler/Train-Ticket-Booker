@@ -21,13 +21,13 @@ public class userBookingService {
     private static final String USERS_PATH ="app/src/main/java/org/ticket/booking/localDb/users.json";
 
     private static final String TRAINS_PATH ="app/src/main/java/org/ticket/booking/localDb/trains.json";
-
+// Reading Values from JSON to User class
     public userBookingService(User user) throws IOException {
         this.user =  user;
         File users = new File(USERS_PATH);
         userList = objectMapper.readValue(users, new TypeReference<List<User>>() {});
     }
-
+// LogIn method for users
     public Boolean loginUser() {
         Optional<User> foundUser = userList.stream()
                 .filter(user1 -> user1.getName().equalsIgnoreCase(user.getName()) &&
@@ -36,7 +36,7 @@ public class userBookingService {
         foundUser.ifPresent(u -> this.user = u);  // TO UPDATE THE USER TO LOGGED IN USER
         return foundUser.isPresent();
     }
-
+// SignUp method for User
     public Boolean signUp(User user1) {
         try {
             user1.setHashPasswords(user1.getPassword()); // hash & store
@@ -44,12 +44,13 @@ public class userBookingService {
             userList.add(user1);
             saveUserListToFile();
             return Boolean.TRUE;
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             return Boolean.FALSE;
         }
     }
 
-
+// Serialise User to user.json
     private void saveUserListToFile() throws IOException{
         File usersFile = new File(USERS_PATH);
         objectMapper.writeValue(usersFile,userList);
@@ -60,14 +61,16 @@ public class userBookingService {
             List<Ticket> bookings = user.getTicketsBooked();
             if (bookings == null || bookings.isEmpty()) {
                 System.out.println("❕ No tickets booked yet.");
-            } else {
+            }
+            else {
                 bookings.forEach(System.out::println);
             }
-        } else {
+        }
+        else {
             System.out.println(" User Not Logged In");
         }
     }
-
+// Cancel a Booking and update persistantly
     public void cancelBooking(Ticket ticket) {
         if (loginUser()) {
             Optional<Ticket> ticketToCancel = user.getTicketsBooked().stream()
@@ -77,16 +80,20 @@ public class userBookingService {
             if (ticketToCancel.isPresent()) {
                 user.getTicketsBooked().remove(ticketToCancel.get());
                 try {
-                    saveUserListToFile(); //  persist update
-                } catch (IOException e) {
+                    saveUserListToFile();
+                    System.out.println(" Booking Canceled successfully");//  persist update
+                }
+                catch (IOException e) {
                     System.out.println(" Failed to update user data file.");
                 }
-                System.out.println(" Booking Canceled successfully");
-            } else {
+
+            }
+            else {
                 System.out.println(" Booking Not found!!!");
             }
 
-        } else {
+        }
+        else {
             System.out.println(" User Not Logged In");
         }
     }
