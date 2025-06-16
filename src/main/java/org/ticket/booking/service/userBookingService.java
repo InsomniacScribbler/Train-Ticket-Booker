@@ -17,18 +17,14 @@ public class userBookingService {
 
     private static  final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String USERS_PATH ="app/src/main/java/org.tickect.booking/localDb/users.json";
+    private static final String USERS_PATH ="app/src/main/java/org/tickect/booking/localDb/users.json";
 
-    private static final String TRAINS_PATH ="app/src/main/java/org.tickect.booking/localDb/trains.json";
+    private static final String TRAINS_PATH ="app/src/main/java/org/tickect/booking/localDb/trains.json";
 
     public userBookingService(User user) throws IOException {
-
         this.user =  user;
-
         File users = new File(USERS_PATH);
-
         userList = objectMapper.readValue(users, new TypeReference<List<User>>() {});
-
     }
 
     public Boolean loginUser() {
@@ -55,5 +51,8 @@ public class userBookingService {
         objectMapper.writeValue(usersFile,userList);
     }
 
+    public void fetchBooking(){
+        user.getTicketsBooked();
+    }
 
 }
