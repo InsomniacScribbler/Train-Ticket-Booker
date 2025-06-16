@@ -2,6 +2,7 @@ package org.ticket.booking.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.ticket.booking.entities.Ticket;
 import org.ticket.booking.entities.User;
 import org.ticket.booking.util.UserServiceUtil;
 
@@ -52,7 +53,20 @@ public class userBookingService {
     }
 
     public void fetchBooking(){
-        user.getTicketsBooked();
+
+        System.out.println(user.getTicketsBooked());
+    }
+    public void cancelBooking(Ticket ticket){
+        if(loginUser()){
+            Optional<Ticket> ticketToCancel = user.getTicketsBooked().stream().filter(t -> t.getTicketId().equalsIgnoreCase(ticket.getTicketId())).findFirst();
+            ticketToCancel.ifPresent(t ->{
+                user.getTicketsBooked().remove(t);
+                System.out.println("Booking Canceled");
+            });
+
+        }
+        else System.out.println("User Not Logged In");
+
     }
 
 }
