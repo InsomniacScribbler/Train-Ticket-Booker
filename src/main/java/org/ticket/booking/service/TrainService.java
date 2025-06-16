@@ -28,6 +28,8 @@ public class TrainService {
     public Optional<Train> getTrainByNumber(int trainNo){
         return trainList.stream().filter(t -> t.getTrainNo() == trainNo).findFirst();
     }
-
+    public boolean checkSeatAvailability(String trainNo, D){
+        Optional <Train> trainOpt = g
+    }
 
 }
