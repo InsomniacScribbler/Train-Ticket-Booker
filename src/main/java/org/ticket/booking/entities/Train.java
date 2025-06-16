@@ -11,4 +11,55 @@ public class Train {
     private List<List<Integer>> seats;
     private Map<String, Time> stationTimes;
     private List<String> stations;
+
+    public String getTrainId() {
+        return trainId;
+    }
+
+    public void setTrainId(String trainId) {
+        this.trainId = trainId;
+    }
+
+    public int getTrainNo() {
+        return trainNo;
+    }
+
+    public void setTrainNo(int trainNo) {
+        this.trainNo = trainNo;
+    }
+
+    public List<List<Integer>> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<List<Integer>> seats) {
+        this.seats = seats;
+    }
+
+    public Map<String, Time> getStationTimes() {
+        return stationTimes;
+    }
+
+    public void setStationTimes(Map<String, Time> stationTimes) {
+        this.stationTimes = stationTimes;
+    }
+
+    public List<String> getStations() {
+        return stations;
+    }
+
+    public void setStations(List<String> stations) {
+        this.stations = stations;
+    }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "trainId='" + trainId + '\'' +
+                ", trainNo=" + trainNo +
+                ", seats=" + seats +
+                ", stationTimes=" + stationTimes +
+                ", stations=" + stations +
+                '}';
+    }
 }
