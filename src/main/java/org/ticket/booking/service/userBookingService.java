@@ -40,6 +40,16 @@ public class userBookingService {
         return foundUser.isPresent();
     }
 
+    public Boolean signUp(User user1){
+        try{
+            userList.add(user1);
+            saveUserToFile();
+            return Boolean.TRUE;
+        } catch (IOException e) {
+            return Boolean.FALSE;
+        }
+    }
+
 
 
 }
