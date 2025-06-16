@@ -59,10 +59,11 @@ public class userBookingService {
     public void cancelBooking(Ticket ticket){
         if(loginUser()){
             Optional<Ticket> ticketToCancel = user.getTicketsBooked().stream().filter(t -> t.getTicketId().equalsIgnoreCase(ticket.getTicketId())).findFirst();
-            ticketToCancel.ifPresent(t ->{
-                user.getTicketsBooked().remove(t);
-                System.out.println("Booking Canceled");
-            });
+            if(ticketToCancel.isPresent()){
+                user.getTicketsBooked().remove(ticketToCancel.get());
+                System.out.println("Booking Canceled successfully");
+            }
+            else System.out.println("Booking Not found!!!");
 
         }
         else System.out.println("User Not Logged In");
