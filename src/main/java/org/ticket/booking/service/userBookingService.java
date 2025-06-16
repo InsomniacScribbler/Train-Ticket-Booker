@@ -33,7 +33,7 @@ public class userBookingService {
                 .filter(user1 -> user1.getName().equalsIgnoreCase(user.getName()) &&
                         UserServiceUtil.checkPassword(user.getPassword(), user1.getHashPasswords()))
                 .findFirst();
-
+        foundUser.ifPresent(u -> this.user = u);  // TO UPDATE THE USER TO LOGGED IN USER
         return foundUser.isPresent();
     }
 
