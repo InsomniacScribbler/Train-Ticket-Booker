@@ -37,8 +37,10 @@ public class userBookingService {
         return foundUser.isPresent();
     }
 
-    public Boolean signUp(User user1){
-        try{
+    public Boolean signUp(User user1) {
+        try {
+            user1.setHashPasswords(user1.getPassword()); // hash & store
+            user1.setPassword(null); // optional: don't store raw password
             userList.add(user1);
             saveUserListToFile();
             return Boolean.TRUE;
@@ -47,27 +49,47 @@ public class userBookingService {
         }
     }
 
+
     private void saveUserListToFile() throws IOException{
         File usersFile = new File(USERS_PATH);
         objectMapper.writeValue(usersFile,userList);
     }
 
-    public void fetchBooking(){
-
-        System.out.println(user.getTicketsBooked());
-    }
-    public void cancelBooking(Ticket ticket){
-        if(loginUser()){
-            Optional<Ticket> ticketToCancel = user.getTicketsBooked().stream().filter(t -> t.getTicketId().equalsIgnoreCase(ticket.getTicketId())).findFirst();
-            if(ticketToCancel.isPresent()){
-                user.getTicketsBooked().remove(ticketToCancel.get());
-                System.out.println("Booking Canceled successfully");
+    public void fetchBooking() {
+        if (loginUser()) {
+            List<Ticket> bookings = user.getTicketsBooked();
+            if (bookings == null || bookings.isEmpty()) {
+                System.out.println("❕ No tickets booked yet.");
+            } else {
+                bookings.forEach(System.out::println);
             }
-            else System.out.println("Booking Not found!!!");
-
+        } else {
+            System.out.println(" User Not Logged In");
         }
-        else System.out.println("User Not Logged In");
-
     }
+
+    public void cancelBooking(Ticket ticket) {
+        if (loginUser()) {
+            Optional<Ticket> ticketToCancel = user.getTicketsBooked().stream()
+                    .filter(t -> t.getTicketId().equalsIgnoreCase(ticket.getTicketId()))
+                    .findFirst();
+
+            if (ticketToCancel.isPresent()) {
+                user.getTicketsBooked().remove(ticketToCancel.get());
+                try {
+                    saveUserListToFile(); //  persist update
+                } catch (IOException e) {
+                    System.out.println(" Failed to update user data file.");
+                }
+                System.out.println(" Booking Canceled successfully");
+            } else {
+                System.out.println(" Booking Not found!!!");
+            }
+
+        } else {
+            System.out.println(" User Not Logged In");
+        }
+    }
+
 
 }
