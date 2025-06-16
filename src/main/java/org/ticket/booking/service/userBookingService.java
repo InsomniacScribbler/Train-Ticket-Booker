@@ -18,9 +18,9 @@ public class userBookingService {
 
     private static  final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String USERS_PATH ="app/src/main/java/org/tickect/booking/localDb/users.json";
+    private static final String USERS_PATH ="app/src/main/java/org/ticket/booking/localDb/users.json";
 
-    private static final String TRAINS_PATH ="app/src/main/java/org/tickect/booking/localDb/trains.json";
+    private static final String TRAINS_PATH ="app/src/main/java/org/ticket/booking/localDb/trains.json";
 
     public userBookingService(User user) throws IOException {
         this.user =  user;
