@@ -10,6 +10,18 @@ public class Ticket {
     private Date dateOfTravel;
     private Train train;
 
+
+    public Ticket(){}
+
+    public Ticket(String ticketId, String UUID, String source, String destination, Date dateOfTravel, Train train) {
+        this.ticketId = ticketId;
+        this.UUID = UUID;
+        this.source = source;
+        this.destination = destination;
+        this.dateOfTravel = dateOfTravel;
+        this.train = train;
+    }
+
     public String getTicketId() {
         return ticketId;
     }
@@ -58,8 +70,8 @@ public class Ticket {
         this.train = train;
     }
 
-    @Override
-    public String toString() {
+
+    public String getTicketInfo() {
         return "Ticket{" +
                 "ticketId='" + ticketId + '\'' +
                 ", UUID='" + UUID + '\'' +
