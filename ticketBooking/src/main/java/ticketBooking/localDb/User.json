@@ -1,0 +1,85 @@
+{
+  "users": [
+    {
+      "user_id": "user123",
+      "name": "Amit Kumar",
+      "hashed_password": "pass123",
+      "tickets_booked": [
+        {
+          "source": "Mumbai",
+          "destination": "Pune",
+          "date_of_travel": "2024-04-10T08:30:00Z",
+          "train": {
+            "train_id": "mpexp",
+            "train_no": 98765,
+            "seats": [
+              [0, 1, 0, 0, 0],
+              [0, 0, 0, 1, 0],
+              [0, 0, 0, 0, 0],
+              [1, 0, 0, 0, 0]
+            ],
+            "stations": {
+              "Mumbai": "08:30:00",
+              "Lonavala": "09:30:00",
+              "Pune": "10:30:00"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "user_id": "user456",
+      "name": "Priya Sharma",
+      "hashed_password": "secure456",
+      "tickets_booked": [
+        {
+          "source": "Delhi",
+          "destination": "Chandigarh",
+          "date_of_travel": "2024-04-12T09:45:00Z",
+          "train": {
+            "train_id": "dcfast",
+            "train_no": 12321,
+            "seats": [
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 0, 0],
+              [1, 0, 0, 0, 0],
+              [0, 0, 0, 1, 0]
+            ],
+            "stations": {
+              "Delhi": "09:45:00",
+              "Karnal": "11:00:00",
+              "Chandigarh": "12:30:00"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "user_id": "user789",
+      "name": "Rahul Verma",
+      "hashed_password": "rahul789",
+      "tickets_booked": [
+        {
+          "source": "Bangalore",
+          "destination": "Hyderabad",
+          "date_of_travel": "2024-04-15T06:15:00Z",
+          "train": {
+            "train_id": "bhyexp",
+            "train_no": 11223,
+            "seats": [
+              [0, 0, 0, 0, 0],
+              [0, 1, 0, 0, 0],
+              [0, 0, 0, 0, 1],
+              [0, 0, 0, 0, 0]
+            ],
+            "stations": {
+              "Bangalore": "06:15:00",
+              "Anantapur": "08:45:00",
+              "Hyderabad": "12:00:00"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
